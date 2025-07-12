@@ -12,3 +12,9 @@ class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem
         fields = ['id','name','price','restaurant']
+        read_only_fields = ['id']
+        
+class MenuItemWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuItem
+        fields = ['name', 'price', 'restaurant']

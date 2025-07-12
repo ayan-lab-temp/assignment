@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Restaurant, MenuItem
-from .serializers import RestaurantSerializer, MenuItemSerializer
+from .serializers import RestaurantSerializer, MenuItemSerializer, MenuItemWriteSerializer
 from rest_framework import views
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
@@ -56,6 +56,8 @@ class menu_detail(RetrieveUpdateDestroyAPIView):
         return MenuItem.objects.filter(restaurant_id=restaurant_id)
     
     def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH', 'POST']:
+            return MenuItemWriteSerializer
         return MenuItemSerializer
     
     
